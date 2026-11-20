@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cosmic Facts — COSMORA</title>
+<meta name="description" content="A random cosmic fact generator, astronomical statistics, a flip-card fact deck and the cosmic calendar." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' x2='1'><stop offset='0' stop-color='%239D7BFF'/><stop offset='1' stop-color='%2342C6FF'/></linearGradient></defs><circle cx='32' cy='32' r='14' fill='url(%23g)'/><ellipse cx='32' cy='32' rx='28' ry='8' fill='none' stroke='%23E2C5FF' stroke-width='3' transform='rotate(-20 32 32)'/></svg>" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="css/style.css?v=3" />
+</head>
+<body>
+  <!-- Cosmic background layers -->
+  <canvas id="starfield" aria-hidden="true"></canvas>
+  <div class="nebula" aria-hidden="true"><span class="n1"></span><span class="n2"></span><span class="n3"></span></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <!-- Loader -->
+  <div class="loader" id="loader">
+    <div class="loader-orbit"><span></span></div>
+    <p class="loader-text">Calibrating star charts…</p>
+  </div>
+
+  <!-- Navigation -->
+  <header class="nav" id="nav">
+    <a href="index.html" class="logo">
+      <span class="logo-mark"><i></i></span>
+      <span class="logo-text">COSMORA</span>
+    </a>
+    <nav class="nav-links" id="navLinks" aria-label="Primary">
+      <a href="index.html" data-route="index.html">Home</a>
+      <a href="planets.html" data-route="planets.html">Solar System</a>
+      <a href="galaxies.html" data-route="galaxies.html">Galaxy Discovery</a>
+      <a href="missions.html" data-route="missions.html">Missions</a>
+      <a href="facts.html" data-route="facts.html">Facts</a>
+      <a href="about.html" data-route="about.html">About</a>
+      <span class="nav-indicator" id="navIndicator"></span>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="soundToggle" aria-label="Toggle warp speed" title="Toggle warp speed">
+        <i data-lucide="zap" class="lucide-inline"></i>
+      </button>
+      <a href="missions.html" class="btn btn-sm btn-primary">Launch</a>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <div class="page-transition" id="pageTransition" aria-hidden="true"></div>
+
+  <main id="app">
+
+      <header class="page-head">
+        <p class="eyebrow reveal">Deck 04 · Cosmic Facts</p>
+        <h1 class="reveal">Mind-bending <span class="grad-text">Facts</span></h1>
+        <p class="muted reveal">The universe is stranger than fiction. Generate a random fact, or browse the numbers that define the cosmos.</p>
+      </header>
+      <section class="fact-gen glass reveal" id="factGen" aria-live="polite">
+        <div class="fg-orbit" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="fg-body" id="fgBody">
+          <p class="eyebrow" id="fgCat">Planets</p>
+          <div class="fg-stat grad-text" id="fgStat">—</div>
+          <p class="fg-text" id="fgText"></p>
+        </div>
+        <div class="fg-actions">
+          <button class="btn btn-primary" id="fgNext">Discover Another Fact <span aria-hidden="true">✦</span></button>
+          <span class="fg-count muted" id="fgCount"></span>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head reveal">
+          <p class="eyebrow">By the numbers</p>
+          <h2>Astronomical <span class="grad-text">statistics</span></h2>
+        </div>
+        <div class="stats-grid row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4" id="statsGrid"></div>
+      </section>
+
+      <section class="section">
+        <div class="section-head reveal">
+          <p class="eyebrow">Fact deck</p>
+          <h2>Tap a card to <span class="grad-text">reveal</span></h2>
+        </div>
+        <div class="flip-grid row row-cols-2 row-cols-lg-4 g-4" id="flipGrid"></div>
+      </section>
+
+      <section class="section">
+        <div class="timeline-cosmic glass reveal">
+          <p class="eyebrow">Cosmic calendar</p>
+          <h2>13.8 billion years, <span class="grad-text">compressed</span></h2>
+          <div class="cc-track" id="ccTrack"></div>
+        </div>
+      </section>
+    
+  </main>
+
+
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <a href="index.html" class="logo"><span class="logo-mark"><i></i></span><span class="logo-text">COSMORA</span></a>
+        <p class="muted">Explore beyond the stars. An immersive window into the universe.</p>
+      </div>
+      <div class="footer-cols">
+        <div><h5>Explore</h5><a href="planets.html">Solar System</a><a href="galaxies.html">Galaxy Discovery</a><a href="missions.html">Missions</a><a href="about.html">About</a></div>
+        <div><h5>Learn</h5><a href="planets.html">Orrery</a><a href="index.html#quiz">Cosmic quiz</a><a href="facts.html">Cosmic facts</a></div>
+        <div><h5>Sources</h5><a href="https://images.nasa.gov" target="_blank" rel="noopener">NASA Image Library</a><a href="https://science.nasa.gov" target="_blank" rel="noopener">NASA Science</a><a href="https://esahubble.org" target="_blank" rel="noopener">ESA/Hubble</a></div>
+      </div>
+    </div>
+    <div class="footer-base"><span>© <span id="year"></span> COSMORA. Crafted among the stars.</span><span class="muted">Images courtesy of the NASA Image and Video Library.</span></div>
+  </footer>
+
+  <button class="to-top" id="toTop" aria-label="Back to top"><i data-lucide="arrow-up" class="lucide-inline"></i></button>
+
+  <script src="js/data.js?v=2"></script>
+  <script src="js/starfield.js?v=2"></script>
+  <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+  <script src="js/main.js?v=2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/facts.js?v=2"></script>
+</body>
+</html>
